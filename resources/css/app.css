@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header-bg {
+  @apply bg-blue-800 text-white p-6;
+}
+
+.nav-link {
+  @apply text-white font-semibold uppercase px-4 py-2 hover:text-yellow-400 transition duration-300 ease-in-out;
+}
+
+.footer {
+  @apply bg-blue-800 text-white text-center p-6;
+}
+
+.card {
+  @apply bg-white p-6 rounded-lg shadow-md mb-8;
+}
+
+.cta-button {
+  @apply bg-yellow-500 text-white font-bold py-3 px-6 rounded-full mt-8 inline-block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+nav ul {
+  @apply flex flex-col md:flex-row md:space-x-8;
+}
+
+.nav-link {
+  @apply block py-2 text-base;
+}
+
+.header-title {
+  @apply font-extrabold mb-4;
+}
+
+.text-lg {
+  @apply text-base;
+}
+
+.form-container {
+  @apply bg-blue-800 text-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto;
+}
+
+.form-label {
+  @apply text-yellow-400 font-semibold mb-2;
+}
+
+.form-input {
+  @apply w-full p-3 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400;
+}
+
+.form-textarea {
+  @apply w-full p-3 border border-gray-400 rounded focus:outline-none focus:ring-2 focus:ring-yellow-400;
+}
+
+.form-button {
+  @apply bg-yellow-500 text-white font-bold py-3 px-6 rounded-lg w-full mt-6;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+}
+
