@@ -19,7 +19,7 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500"/>
         </div>
 
-        <!-- Heslo -->
+
         <div class="mb-4 relative">
             <x-input-label for="password" :value="__('Heslo')" class="text-lg font-semibold text-gray-700 dark:text-gray-200"/>
             <x-text-input id="password" class="block mt-2 w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md dark:bg-gray-900 focus:ring-2 focus:ring-indigo-500" type="password" name="password" required autocomplete="new-password" />
@@ -29,7 +29,7 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500"/>
         </div>
 
-        <!-- Potvrdenie hesla -->
+
         <div class="mb-4 relative">
             <x-input-label for="password_confirmation" :value="__('Potvrď heslo')" class="text-lg font-semibold text-gray-700 dark:text-gray-200"/>
             <x-text-input id="password_confirmation" class="block mt-2 w-full p-3 border border-gray-300 dark:border-gray-700 rounded-md dark:bg-gray-900 focus:ring-2 focus:ring-indigo-500" type="password" name="password_confirmation" required autocomplete="new-password" />
