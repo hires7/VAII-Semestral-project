@@ -1,15 +1,15 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/services', function () {
-    return view('services');
-});
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+
 
 Route::get('/about', function () {
     return view('about');
