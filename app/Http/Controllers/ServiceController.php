@@ -27,7 +27,7 @@ class ServiceController extends Controller
 
     Service::create($validatedData);
 
-    return redirect()->route('services.index')->with('success', 'Služba bola úspešne pridaná.');
+    return redirect()->route('services.index')->with('success', 'Služba pridaná.');
     }
 
 
@@ -36,20 +36,28 @@ class ServiceController extends Controller
     return view('services.edit', compact('service'));
     }
 
-public function update(Request $request, $id) {
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required|string',
-        'price' => 'required|numeric|min:0',
-    ]);
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric|min:0',
+        ]);
 
-    $service = Service::findOrFail($id);
-    $service->update([
-        'name' => $request->input('name'),
-        'description' => $request->input('description'),
-        'price' => $request->input('price'),
-    ]);
+        $service = Service::findOrFail($id);
+        $service->update([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+        ]);
 
-    return redirect()->route('services.index')->with('success', 'Služba bola úspešne upravená.');
+        return redirect()->route('services.index')->with('success', 'Služba upravená.');
     }
+
+    public function destroy($id) {
+        $service = Service::findOrFail($id);
+        $service->delete();
+
+        return redirect()->route('services.index')->with('success', 'Služba vymazaná.');
+    }
+
 }

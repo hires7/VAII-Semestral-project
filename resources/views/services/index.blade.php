@@ -11,7 +11,17 @@
                 <a href="{{ route('services.edit', $service->id) }}" class="text-indigo-600 hover:text-indigo-700 underline">
                     Upraviť
                 </a>
+
+                <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-red-600 hover:text-red-700 underline ml-4"
+                        onclick="return confirm('Naozaj chcete vymazať túto službu?');">
+                        Zmazať
+                    </button>
+                </form>
             </div>
+
         </div>
     @endforeach
 </div>
