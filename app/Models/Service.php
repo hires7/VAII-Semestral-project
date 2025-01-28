@@ -11,4 +11,5 @@ class Service extends Model
         'description', 
         'price',
     ];
+    
 }
