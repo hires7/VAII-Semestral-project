@@ -8,14 +8,18 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+// Verejné zobrazenie služieb (index a detail služby)
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
-Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
-Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
-Route::get('/services/{id}/edit', [ServiceController::class, 'edit'])->name('services.edit');
-Route::put('/services/{id}', [ServiceController::class, 'update'])->name('services.update');
-Route::delete('/services/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
+Route::get('/services/{id}', [ServiceController::class, 'show'])->name('services.show');
 
-
+// Chránené routy na správu služieb (len pre adminov)
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+    Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
+    Route::get('/services/{id}/edit', [ServiceController::class, 'edit'])->name('services.edit');
+    Route::put('/services/{id}', [ServiceController::class, 'update'])->name('services.update');
+    Route::delete('/services/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
+});
 
 Route::get('/about', function () {
     return view('about');
@@ -29,9 +33,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.view');
 });
 
 
