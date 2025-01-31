@@ -15,7 +15,11 @@ class ServiceController extends Controller
     }
 
     public function create() {
-        return view('services.create');
+    if (auth()->user()->role !== 'admin') {
+        abort(403, 'Unauthorized action.');
+    }
+
+    return view('services.create');
     }
 
     public function store(Request $request) {
@@ -32,6 +36,10 @@ class ServiceController extends Controller
 
 
     public function edit($id) {
+    if (auth()->user()->role !== 'admin') {
+        abort(403, 'Unauthorized action.');
+    }
+
     $service = Service::findOrFail($id);
     return view('services.edit', compact('service'));
     }
@@ -54,10 +62,14 @@ class ServiceController extends Controller
     }
 
     public function destroy($id) {
-        $service = Service::findOrFail($id);
-        $service->delete();
+    if (auth()->user()->role !== 'admin') {
+        abort(403, 'Unauthorized action.');
+    }
 
-        return redirect()->route('services.index')->with('success', 'Služba vymazaná.');
+    $service = Service::findOrFail($id);
+    $service->delete();
+
+    return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
     }
 
 }
