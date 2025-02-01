@@ -8,9 +8,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-
+Route::get('/services/search', [ServiceController::class, 'search'])->name('services.search');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
-Route::get('/services/{id}', [ServiceController::class, 'show'])->name('services.show');
+Route::get('/services/refresh', [ServiceController::class, 'getServices']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');

@@ -61,6 +61,21 @@ class ServiceController extends Controller
         return redirect()->route('services.index')->with('success', 'Služba upravená.');
     }
 
+    public function search(Request $request) {
+        $query = $request->input('query');
+
+        $services = Service::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->get();
+
+        return response()->json($services);
+    }
+
+    public function getServices() {
+        $services = Service::all();
+        return response()->json($services);
+    }
+
     public function destroy($id) {
     if (auth()->user()->role !== 'admin') {
         abort(403, 'Unauthorized action.');

@@ -21,3 +21,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+document.getElementById('search-input').addEventListener('input', function() {
+    let query = this.value;
+
+    fetch(`services/search?query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            let resultsContainer = document.getElementById('search-results');
+            resultsContainer.innerHTML = '';
+
+            if (data.length > 0) {
+                data.forEach(service => {
+                    let serviceCard = `
+                        <div class="card">
+                            <h3 class="text-2xl font-bold">${service.name}</h3>
+                            <p>${service.description}</p>
+                            <p>Cena: ${service.price} €</p>
+                        </div>
+                    `;
+                    resultsContainer.innerHTML += serviceCard;
+                });
+            } else {
+                resultsContainer.innerHTML = '<p>Žiadne výsledky nenájdené.</p>';
+            }
+        })
+        .catch(error => console.error('Chyba pri vyhľadávaní:', error));
+});
+
