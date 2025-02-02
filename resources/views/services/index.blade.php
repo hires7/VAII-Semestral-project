@@ -4,11 +4,12 @@
 
 @auth
     @if (auth()->user()->role === 'admin')
-    <a href="route('')" class="cta-button bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300">
+    <a href="{{ route('services.editservices') }}" class="cta-button bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300">
         Upraviť služby
     </a>    
     @endif
 @endauth
+
 
 <div class="container mx-auto p-4">
     <input

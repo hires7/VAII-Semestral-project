@@ -15,33 +15,39 @@ class ServiceController extends Controller
     }
 
     public function create() {
-    if (auth()->user()->role !== 'admin') {
-        abort(403, 'Unauthorized action.');
-    }
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
 
-    return view('services.create');
+        return view('services.create');
     }
 
     public function store(Request $request) {
-    $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required|string|max:1000',
-        'price' => 'required|numeric|min:0',
-    ]);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'price' => 'required|numeric|min:0',
+        ]);
 
-    Service::create($validatedData);
+        Service::create($validatedData);
 
-    return redirect()->route('services.index')->with('success', 'Služba pridaná.');
+        return redirect()->route('services.index')->with('success', 'Služba pridaná.');
+    }
+
+    public function editServices() {
+
+        $services = Service::all();
+        return view('services.editservices', compact('services'));
     }
 
 
     public function edit($id) {
-    if (auth()->user()->role !== 'admin') {
-        abort(403, 'Unauthorized action.');
-    }
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
 
-    $service = Service::findOrFail($id);
-    return view('services.edit', compact('service'));
+        $service = Service::findOrFail($id);
+        return view('services.edit', compact('service'));
     }
 
     public function update(Request $request, $id) {
@@ -77,14 +83,14 @@ class ServiceController extends Controller
     }
 
     public function destroy($id) {
-    if (auth()->user()->role !== 'admin') {
-        abort(403, 'Unauthorized action.');
-    }
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
 
-    $service = Service::findOrFail($id);
-    $service->delete();
+        $service = Service::findOrFail($id);
+        $service->delete();
 
-    return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
+        return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
     }
 
 }
