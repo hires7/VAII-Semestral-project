@@ -71,7 +71,7 @@ class ServiceController extends Controller
         return response()->json($services);
     }
 
-    public function getServices() {
+    public function refresh() {
         $services = Service::all();
         return response()->json($services);
     }

@@ -10,11 +10,13 @@ Route::get('/', function () {
 
 Route::get('/services/search', [ServiceController::class, 'search'])->name('services.search');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
-Route::get('/services/refresh', [ServiceController::class, 'getServices']);
+Route::get('/services/refresh', [ServiceController::class, 'refresh'])->name('services.refresh');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
+    Route::post('/services/editservices', [ServiceController::class, 'store'])->name('services.store');
     Route::get('/services/{id}/edit', [ServiceController::class, 'edit'])->name('services.edit');
     Route::put('/services/{id}', [ServiceController::class, 'update'])->name('services.update');
     Route::delete('/services/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
