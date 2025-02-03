@@ -21,11 +21,11 @@
             @auth
                 @if (auth()->user()->role === 'admin')
                     <div class="mt-4">
-                        <a href="{{ route('services.edit', $service->id) }}" class="text-indigo-600 hover:text-indigo-800">Upraviť</a>
+                        <a href="{{ route('services.edit', $service->id) }}" class="edit-button">Upraviť</a>
                         <form action="{{ route('services.destroy', $service->id) }}" method="POST" class="inline-block ml-4">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-800">Zmazať</button>
+                            <button type="submit" class="delete-button">Zmazať</button>
                         </form>
                     </div>
                 @endif

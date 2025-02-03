@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 Route::get('/services/search', [ServiceController::class, 'search'])->name('services.search');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
