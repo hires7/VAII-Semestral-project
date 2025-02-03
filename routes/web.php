@@ -10,6 +10,12 @@ Route::get('/', function () {
 })->name('home');
 
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+
+Route::middleware('auth')->group(function () {
+    Route::delete('/reviews/{id}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+});
+
 
 Route::get('/services/search', [ServiceController::class, 'search'])->name('services.search');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');

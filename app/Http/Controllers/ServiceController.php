@@ -16,7 +16,7 @@ class ServiceController extends Controller
 
     public function create() {
         if (auth()->user()->role !== 'admin') {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'Nemate povolenie');
         }
 
         return view('services.create');
@@ -43,7 +43,7 @@ class ServiceController extends Controller
 
     public function edit($id) {
         if (auth()->user()->role !== 'admin') {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'Nemate povolenie');
         }
 
         $service = Service::findOrFail($id);
@@ -84,13 +84,13 @@ class ServiceController extends Controller
 
     public function destroy($id) {
         if (auth()->user()->role !== 'admin') {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'Nemate povolenie');
         }
 
         $service = Service::findOrFail($id);
         $service->delete();
 
-        return redirect()->route('services.index')->with('success', 'Service deleted successfully.');
+        return redirect()->route('services.index')->with('success', 'Služba zmazaná.');
     }
 
 }

@@ -15,7 +15,6 @@
 
 <div class="card md:p-8">
     <h2 class="text-3xl font-semibold mb-4">Pridajte hodnotenie</h2>
-
     @auth
         <form action="{{ route('reviews.store') }}" method="POST" class="space-y-4">
             @csrf
