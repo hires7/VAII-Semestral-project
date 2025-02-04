@@ -41,15 +41,46 @@ class ReviewController extends Controller
         return redirect()->route('home')->with('success', 'Hodnotenie pridane.');
     }
 
-    public function destroy($id) {
-        if (auth()->user()->role !== 'admin') {
-            abort(403, 'Nemáte povolenie na vykonanie tejto akcie.');
+    public function edit($id) {
+        $review = Review::findOrFail($id);
+
+        if ($review->user_id !== auth()->id()) {
+            abort(403, 'Nemáte oprávnenie na úpravu tejto recenzie.');
         }
 
+        return view('reviews.edit', compact('review'));
+    }
+
+    public function update(Request $request, $id) {
+        $validatedData = $request->validate([
+            'content' => 'required|string|max:1000',
+            'rating' => 'required|integer|min:1|max:5',
+        ]);
+
         $review = Review::findOrFail($id);
+
+    
+        if ($review->user_id !== auth()->id()) {
+            abort(403, 'Nemáte oprávnenie na úpravu tejto recenzie.');
+        }
+
+        $review->update($validatedData);
+
+        return redirect()->route('reviews.index')->with('success', 'Recenzia bola upravená.');
+    }
+
+
+    public function destroy($id) {
+        $review = Review::findOrFail($id);
+
+        if ($review->user_id !== auth()->id()) {
+            abort(403, 'Nemáte oprávnenie na vymazanie tejto recenzie.');
+        }
+
         $review->delete();
 
-        return redirect()->route('reviews.index')->with('success', 'Recenzia bola zmazaná.');
+        return redirect()->route('reviews.index')->with('success', 'Recenzia bola vymazaná.');
+
     }
 
 

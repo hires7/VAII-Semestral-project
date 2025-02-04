@@ -77,3 +77,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(refreshServices, 10000);
 });
+
+
