@@ -28,10 +28,6 @@ class ReviewController extends Controller
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
-        if (Review::where('user_id', auth()->id())->exists()) {
-            return redirect()->back()->with('error', 'Uzivatel uz hodnotil.');
-        }
-
         Review::create([
             'user_id' => auth()->id(),
             'content' => $validatedData['content'],
