@@ -10,7 +10,7 @@
 
   <header class="header-bg bg-indigo-600 py-4">
     <div class="container mx-auto">
-      <h1 class="header-title text-3xl md:text-5xl text-white font-bold">Autoservis</h1>
+      <h1 class="header-title text-3xl md:text-5xl text-white font-bold">AutoServis</h1>
       <nav>
         <ul class="flex space-x-6 mt-4 text-white">
 

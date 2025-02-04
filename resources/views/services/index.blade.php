@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
+<div class="flex justify-center items-center">
+    <h1 class="text-3xl font-bold mb-4 text-center">Zoznam služieb</h1>
+</div>
 @auth
     @if (auth()->user()->role === 'admin')
     <a href="{{ route('services.editservices') }}" class="cta-button bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300">
