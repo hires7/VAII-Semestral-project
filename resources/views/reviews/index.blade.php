@@ -9,36 +9,36 @@
         <p class="text-gray-700">Zatiaľ neexistujú žiadne recenzie.</p>
     @else
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    @foreach ($reviews as $review)
-        <div class="card p-4 bg-white shadow-md rounded-lg">
-            <h3 class="text-xl font-bold text-indigo-600">{{ $review->user->name }}</h3>
-            <p class="text-gray-800">{{ $review->content }}</p>
-            <p class="text-gray-600 font-semibold">Hodnotenie: {{ $review->rating }} / 5</p>
-            
-            @auth
-                <!-- Skontrolujeme, či aktuálny používateľ vlastní túto recenziu -->
-                @if (auth()->id() === $review->user_id)
-                    <div class="flex space-x-2 mt-2">
-                        <!-- Edit -->
-                        <a href="{{ route('reviews.edit', $review->id) }}" 
-                           class="edit-button">
-                           Upraviť
-                        </a>
-                        <!-- Delete -->
-                        <form action="{{ route('reviews.destroy', $review->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="delete-button">Zmazať</button>
-                        </form>
-                    </div>
-                @endif
-            @endauth
-        </div>
-    @endforeach
-</div>
-
+        @foreach ($reviews as $review)
+            <div class="card p-4 bg-white shadow-md rounded-lg">
+                <h3 class="text-xl font-bold text-indigo-600">{{ $review->user->name }}</h3>
+                <p class="text-gray-800">{{ $review->content }}</p>
+                <p class="text-gray-600 font-semibold">Hodnotenie: {{ $review->rating }} / 5</p>
+                
+                @auth
+                    {{-- Skontrolujeme, či je používateľ admin alebo vlastní recenziu --}}
+                    @if (auth()->user()->role === 'admin' || auth()->id() === $review->user_id)
+                        <div class="flex space-x-2 mt-2">
+                            <a href="{{ route('reviews.edit', $review->id) }}" 
+                               class="edit-button text-blue-500 hover:text-blue-700">
+                               Upraviť
+                            </a>
+                            <form action="{{ route('reviews.destroy', $review->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-button text-red-500 hover:text-red-700">
+                                    Zmazať
+                                </button>
+                            </form>
+                        </div>
+                    @endif
+                @endauth
+            </div>
+        @endforeach
+    </div>
     @endif
 </div>
+
 
 
 <div class="card md:p-8">

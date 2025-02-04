@@ -72,16 +72,15 @@ class ReviewController extends Controller
 
     public function destroy($id) {
         $review = Review::findOrFail($id);
-
-        if ($review->user_id !== auth()->id()) {
+        if ($review->user_id !== auth()->id() && auth()->user()->role !== 'admin') {
             abort(403, 'Nemáte oprávnenie na vymazanie tejto recenzie.');
         }
 
         $review->delete();
 
         return redirect()->route('reviews.index')->with('success', 'Recenzia bola vymazaná.');
-
     }
+
 
 
 }
