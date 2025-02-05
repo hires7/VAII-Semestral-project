@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100 text-gray-900">
 
-  <header class="header-bg bg-indigo-600 py-4">
+<header class="header-bg bg-indigo-600 py-4">
     <div class="container mx-auto">
       <h1 class="header-title text-3xl md:text-5xl text-white font-bold">AutoServis</h1>
       <nav>
@@ -25,21 +25,28 @@
           @endguest
 
           @auth
-            <li><a href="{{ route('profile.edit') }}" class="menu-text">Upraviť profil</a></li>
+          <li class="relative group">
+            <a href="{{ route('cars.index') }}" class="menu-text">Autá</a>
+            <ul class="absolute left-0 mt-2 bg-white text-gray-900 rounded-lg shadow-lg hidden group-hover:flex flex-col w-40">
+              <li><a href="{{ route('cars.create') }}" class="dropdown-item">Pridať auto</a></li>
+            </ul>
+          </li>
+
+            <li><a href="{{ route('profile.edit') }}" class="menu-text">Profil</a></li>
             <li>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="inline">
-                @csrf
-                <button type="submit" class="menu-text">
-                  Odhlásenie
-                </button>
+              @csrf
+                <button type="submit" class="menu-text">Odhlásenie</button>
               </form>
             </li>
+
           @endauth
 
         </ul>
       </nav>
     </div>
-  </header>
+</header>
+
 
   <main class="container mx-auto p-4 md:p-8">
     @yield('content')
@@ -47,7 +54,7 @@
 
   <footer class="footer bg-indigo-600 py-4">
     <div class="container mx-auto text-center text-white">
-      <p>Ďakujeme za využitie našish služieb</p>
+      <p>Ďakujeme za využitie našich služieb</p>
       <p>&copy; 2024 AutoServis. Všetky práva vyhradené.</p>
     </div>
   </footer>

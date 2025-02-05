@@ -23,9 +23,7 @@
     <div id="search-results" class="mt-4"></div>
 </div>
 
-<div id="services-container" class="container mx-auto p-4 md:p-8">
-    <!-- sluzby -->
-</div>
+<div id="services-container" class="container mx-auto p-4 md:p-8"></div>
 
 @auth
     @if (auth()->user()->role === 'admin')
