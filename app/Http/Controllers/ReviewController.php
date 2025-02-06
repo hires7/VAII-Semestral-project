@@ -34,7 +34,7 @@ class ReviewController extends Controller
             'rating' => $validatedData['rating'],
         ]);
 
-        return redirect()->route('home')->with('success', 'Hodnotenie pridane.');
+        return redirect()->route('reviews.index')->with('success', 'Hodnotenie pridane.');
     }
 
     public function edit($id) {
