@@ -4,7 +4,7 @@
 <div class="container mx-auto p-4 md:p-8">
     <h1 class="text-3xl font-bold mb-4">Pridať nové auto</h1>
 
-    <form action="{{ route('cars.store') }}" method="POST" class="space-y-4">
+    <form action="{{ route('cars.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         @csrf
 
         <div>
@@ -24,7 +24,12 @@
 
         <div>
             <label for="year" class="block font-semibold">Rok výroby:</label>
-            <input type="number" id="year" name="year" class="form-input" placeholder="Zadajte rok výroby" min="1900" max="{{ date('Y') }}" required>
+            <input type="number" id="year" name="year" class="form-input" placeholder="Zadajte rok výroby" min="1950" max="{{ date('Y') }}" required>
+        </div>
+
+        <div>
+            <label for="photo" class="block font-semibold">Fotka auta:</label>
+            <input type="file" name="photo" id="photo" class="form-input">
         </div>
 
         <button type="submit" class="form-button">Pridať auto</button>

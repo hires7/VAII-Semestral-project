@@ -39,6 +39,11 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-red-500"/>
         </div>
 
+        <div class="mb-4 flex items-center">
+            <input id="is_admin" type="checkbox" name="is_admin" class="mr-2 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+            <label for="is_admin" class="text-gray-700 dark:text-gray-200 font-medium">Registrovať ako admin</label>
+        </div>
+
         <div class="flex items-center justify-between mt-4">
             <a class="text-sm text-indigo-600 hover:text-indigo-500 font-semibold focus:outline-none" href="{{ route('login') }}">
                 {{ __('Už máš účet?') }}

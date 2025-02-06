@@ -25,7 +25,7 @@
 
         <div>
             <label for="year" class="block font-semibold">Rok výroby:</label>
-            <input type="number" id="year" name="year" class="form-input" value="{{ $car->year }}" min="1900" max="{{ date('Y') }}" required>
+            <input type="number" id="year" name="year" class="form-input" value="{{ $car->year }}" min="1950" max="{{ date('Y') }}" required>
         </div>
 
         <button type="submit" class="form-button">Uložiť zmeny</button>

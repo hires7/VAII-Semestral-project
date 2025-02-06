@@ -51,31 +51,6 @@ document.getElementById('search-input').addEventListener('input', function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const refreshServices = () => {
-        fetch('/dashboard/VaiiSem/public/services/refresh')
-            .then(response => response.json())
-            .then(services => {
-                const container = document.getElementById('services-container');
-                container.innerHTML = '';
 
-                services.forEach(service => {
-                    const serviceCard = `
-                        <div class="card mt-4">
-                            <h3 class="text-2xl md:text-3xl font-bold mb-2">${service.name}</h3>
-                            <p class="text-lg md:text-xl text-gray-700">${service.description}</p>
-                            <p class="text-lg font-bold text-indigo-600 mt-2">Cena: ${service.price} €</p>
-                        </div>
-                    `;
-                    container.innerHTML += serviceCard; 
-                });
-            })
-            .catch(error => console.error('Chyba pri aktualizácii služieb:', error));
-    };
-
-    refreshServices();
-
-    setInterval(refreshServices, 10000);
-});
 
 

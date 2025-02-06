@@ -21,13 +21,20 @@ class CarController extends Controller
             'brand' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'license_plate' => 'required|string|max:255|unique:cars',
-            'year' => 'required|integer|min:1886|max:' . date('Y'),
+            'year' => 'required|integer|min:1950|max:' . date('Y'),
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
+    
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('cars', 'public');
+            $validatedData['photo_path'] = $path;
+        }
+    
         auth()->user()->cars()->create($validatedData);
-
+    
         return redirect()->route('cars.index')->with('success', 'Auto bolo pridané.');
     }
+    
 
     public function edit(Car $car) {
         if ($car->user_id !== auth()->id()) {
@@ -46,7 +53,7 @@ class CarController extends Controller
             'brand' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'license_plate' => 'required|string|max:255|unique:cars,license_plate,' . $car->id,
-            'year' => 'required|integer|min:1900|max:' . date('Y'),
+            'year' => 'required|integer|min:1950|max:' . date('Y'),
         ]);
 
         $car->update($validatedData);
