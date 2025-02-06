@@ -23,6 +23,14 @@
             <li><a href="{{ url('/login') }}" class="menu-text">Prihlásenie</a></li>
             <li><a href="{{ url('/register') }}" class="menu-text">Registrácia</a></li>
           @endguest
+          
+          @auth
+            @if (auth()->user()->role === 'admin')
+              <li>
+                <a href="{{ route('news.create') }}" class="menu-text">Pridať oznam</a>
+              </li>
+            @endif
+          @endauth
 
           @auth
           <li class="relative group">

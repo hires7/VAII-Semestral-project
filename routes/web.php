@@ -4,11 +4,20 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+Route::get('/', [NewsController::class, 'index'])->name('home');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+    Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+    Route::delete('/news/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
