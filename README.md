@@ -20,12 +20,15 @@ Inštalácia projektu
 1. Klonovanie projektu
 
     Ak máte Git
+
     git clone https://github.com/tvoj-repo/autoservis.git
+
     cd autoservis
 
 2. Inštalácia závislostí
 
     composer install  # Laravel balíčky
+    
     npm install        # Frontend (Tailwind, Vite, JS)
     
 3. Konfigurácia .env
